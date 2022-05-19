@@ -84,6 +84,10 @@ public class BillImpl implements Bill{
         if (total > 1000){
             total = total*0.9;
         }
+        //Utile per il punto 7.
+        if (total < 10){
+            total = total + 2;
+        }
 
         return total;
     }

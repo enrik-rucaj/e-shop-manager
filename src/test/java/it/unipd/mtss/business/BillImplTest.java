@@ -123,4 +123,11 @@ public class BillImplTest {
 
         bill.getOrderPrice(itemsOrdered, user, orario);
     }
+
+    @Test
+    public void testGetSumWithLessThan10Euros() throws BillException {
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Blade Hawks", 5.99));
+
+        assertEquals(7.99, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+    }
 }
