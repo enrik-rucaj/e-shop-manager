@@ -67,4 +67,21 @@ public class BillImplTest {
 
         assertEquals(890.25, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
     }
+
+    @Test
+    public void testGiveAwayLessExpensiveMouseAfterTenBought() throws BillException {
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Hp", 26.99));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+
+        assertEquals(800.0, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+    }
 }
