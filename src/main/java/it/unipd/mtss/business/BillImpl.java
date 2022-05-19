@@ -16,8 +16,10 @@ public class BillImpl implements Bill{
         double total = 0.0;
         double prezzoProcessoreMinimo = 10000;
         double prezzoMouseMinimo = 10000;
+        double prezzoTastieraMinimo = 10000;
         int nProcessori = 0;
         int nMouse = 0;
+        int nTastiere = 0;
 
         if(itemsOrdered == null) {
             throw new BillException("Items Ordered must not be null");
@@ -45,6 +47,13 @@ public class BillImpl implements Bill{
                     prezzoMouseMinimo = prezzoItem;
                 }
             }
+            //Utile per il punto 4.
+            if (item.getItemType().equals(EItem.type.Keyboard)){
+                nTastiere++;
+                if (prezzoItem < prezzoTastieraMinimo){
+                    prezzoTastieraMinimo = prezzoItem;
+                }
+            }
 
             total += prezzoItem;
         }
@@ -56,6 +65,15 @@ public class BillImpl implements Bill{
         //Utile per il punto 3.
         if (nMouse > 10){
             total = total - prezzoMouseMinimo;
+        }
+        //Utile per il punto 4.
+        if (nMouse > 0 && nTastiere > 0 && nMouse == nTastiere){
+            if (prezzoMouseMinimo < prezzoTastieraMinimo){
+                total = total - prezzoMouseMinimo;
+            }
+            else{
+                total = total - prezzoTastieraMinimo;
+            }
         }
 
         return total;

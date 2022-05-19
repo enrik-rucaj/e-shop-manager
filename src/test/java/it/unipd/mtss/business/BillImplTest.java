@@ -30,9 +30,10 @@ public class BillImplTest {
         itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i5 12Gen", 300.0));
         itemsOrdered.add(new EItem(EItem.type.Motherboard, "Asus Z390", 199.99));
         itemsOrdered.add(new EItem(EItem.type.Keyboard, "Corsair", 97.50));
+        itemsOrdered.add(new EItem(EItem.type.Keyboard, "Corsair", 97.50));
         itemsOrdered.add(new EItem(EItem.type.Mouse, "Hp", 26.0));
 
-        assertEquals(623.49, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+        assertEquals(720.99, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
     }
 
     @Test(expected=BillException.class)
@@ -83,5 +84,15 @@ public class BillImplTest {
         itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
 
         assertEquals(800.0, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+    }
+
+    @Test
+    public void testGiveAwayLessExpensiveIfNumberOfKeyboardsEqualsNumberOfMouses() throws BillException {
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Hp", 26.99));
+        itemsOrdered.add(new EItem(EItem.type.Keyboard, "Corsair", 97.50));
+        itemsOrdered.add(new EItem(EItem.type.Keyboard, "Corsair", 97.50));
+
+        assertEquals(275.0, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
     }
 }
