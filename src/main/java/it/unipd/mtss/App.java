@@ -11,6 +11,9 @@ package it.unipd.mtss;
  */
 public class App 
 {
+    void ciao(){
+        System.out.println("ciao");
+    }
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
