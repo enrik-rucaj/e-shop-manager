@@ -55,4 +55,16 @@ public class BillImplTest {
 
         bill.getOrderPrice(itemsOrdered, user, orario);
     }
+
+    @Test
+    public void testDiscountOnProcessorAfterFiveBought() throws BillException {
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i5 12Gen", 170.0));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i5 12Gen", 170.0));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i5 12Gen", 170.0));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i5 12Gen", 170.0));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i5 12Gen", 170.0));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i3 5Gen", 80.50));
+
+        assertEquals(890.25, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+    }
 }
