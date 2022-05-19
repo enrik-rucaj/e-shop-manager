@@ -95,4 +95,14 @@ public class BillImplTest {
 
         assertEquals(275.0, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
     }
+
+    @Test
+    public void test2GiveAwayLessExpensiveIfNumberOfKeyboardsEqualsNumberOfMouses() throws BillException {
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Logitech", 80.0));
+        itemsOrdered.add(new EItem(EItem.type.Mouse, "Hp", 26.99));
+        itemsOrdered.add(new EItem(EItem.type.Keyboard, "Chino", 7.50));
+        itemsOrdered.add(new EItem(EItem.type.Keyboard, "Corsair", 97.50));
+
+        assertEquals(204.49, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+    }
 }
