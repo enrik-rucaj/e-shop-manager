@@ -75,6 +75,10 @@ public class BillImpl implements Bill{
                 total = total - prezzoTastieraMinimo;
             }
         }
+        //Utile per il punto 5.
+        if (total > 1000){
+            total = total*0.9;
+        }
 
         return total;
     }

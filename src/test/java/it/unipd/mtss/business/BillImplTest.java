@@ -105,4 +105,13 @@ public class BillImplTest {
 
         assertEquals(204.49, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
     }
+
+    @Test
+    public void testDiscountIfSumIsMoreThanOneThousand() throws BillException {
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i9 12Gen", 400.50));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i9 12Gen", 400.50));
+        itemsOrdered.add(new EItem(EItem.type.Processor, "Intel i9 12Gen", 400.50));
+
+        assertEquals(1081.35, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
+    }
 }
