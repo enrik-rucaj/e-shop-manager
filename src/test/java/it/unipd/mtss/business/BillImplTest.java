@@ -114,4 +114,13 @@ public class BillImplTest {
 
         assertEquals(1081.35, bill.getOrderPrice(itemsOrdered, user, orario), 0.001);
     }
+
+    @Test(expected=BillException.class)
+    public void testGetSumWithMoreThan30Items() throws BillException {
+        for(int i=0; i<31; i++) {
+            itemsOrdered.add(new EItem(EItem.type.Mouse, "Hp", 26.99));
+        }
+
+        bill.getOrderPrice(itemsOrdered, user, orario);
+    }
 }

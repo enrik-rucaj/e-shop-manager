@@ -31,6 +31,11 @@ public class BillImpl implements Bill{
             throw new BillException("User must not be null");
         }
 
+        //Utile per il punto 6.
+        if (itemsOrdered.size() > 30){
+            throw new BillException("There must be less Items Ordered than 30");
+        }
+
         for (EItem item : itemsOrdered) {
             double prezzoItem = item.getPrice();
             //Utile per il punto 2.
